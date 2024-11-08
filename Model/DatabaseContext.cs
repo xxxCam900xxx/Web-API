@@ -10,14 +10,17 @@ namespace M223PunchclockDotnet.Model {
         public DatabaseContext(DbContextOptions<DatabaseContext> options): base(options){
 
         }
-
-        public DbSet<Entry> Entries {get; set;}
         public DbSet<Chat> Chats { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            modelBuilder.Entity<Entry>().ToTable("Entry");
+            modelBuilder.Entity<Chat>()
+                .ToTable("Chat")
+                .HasMany(chat => chat.Messages)
+                .WithOne(message => message.Chat)
+                .IsRequired(false);
 
-            modelBuilder.Entity<Chat>().ToTable("Chat");
+            modelBuilder.Entity<Message>().ToTable("Message");
         }
 
 

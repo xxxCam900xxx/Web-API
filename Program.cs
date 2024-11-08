@@ -15,7 +15,6 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<EntryService, EntryService>();
 builder.Services.AddScoped<ChatService, ChatService>();
 
 var app = builder.Build();
